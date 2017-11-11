@@ -5,7 +5,9 @@ if [[ $# -eq 0 ]] ; then
     exit 1
 fi
 
+SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 dir="$(pwd)/$1"
 mkdir $dir
 
-cp -r project/ $dir
+cp -r "$SCRIPTPATH/project/" $dir
