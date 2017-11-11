@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]] ; then
+    echo 'You must specify a directory for your project to exist in.'
+    exit 1
+fi
+
+dir="$(pwd)/$1"
+mkdir $dir
+
+cp -r project/ $dir
