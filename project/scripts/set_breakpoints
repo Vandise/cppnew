@@ -18,9 +18,11 @@ for source in $SOURCES
 do
   filename=$(realpath $source)
   echo $filename
-  lineno=$(grep -n '\/\/-BREAKPOINT-' $source | cut -d: -f 1)
-  if [[ $lineno =~ $re ]] ; then
-    echo -e "\t Breakpoint found at: $filename :: $lineno"
-    echo "breakpoint set -f $filename -l $lineno" >> $LLDBSCRIPT
-  fi
+  linenos=$(grep -n '\/\/-BREAKPOINT-' $source | cut -d: -f 1)
+  for l in $linenos; do
+    if [[ $l =~ $re ]] ; then
+      echo -e "\t Breakpoint found at: $filename :: $l"
+      echo "breakpoint set -f $filename -l $l" >> $LLDBSCRIPT
+    fi
+  done
 done
